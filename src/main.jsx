@@ -1,5 +1,4 @@
 import App from "./App";
-import Project from "./Project";
 import NotFound from "./NotFound";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -9,7 +8,6 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
-  { path: "/project/:slug", element: <Project /> },
   { path: "*", element: <NotFound /> },
 ]);
 

@@ -8,11 +8,13 @@ import Experiences from "./utils/Experiences";
 import profile from "./assets/images/profile.jpeg";
 import { useEffect, useRef, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { ToastContainer, Bounce, toast } from "react-toastify";
 
 const App = () => {
   const form = useRef();
   const descriptionRefs = useRef([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
   const [collapsingIndex, setCollapsingIndex] = useState(null);
   const [formData, setFormData] = useState({
@@ -65,7 +67,17 @@ const App = () => {
       .sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
       .then(
         () => {
-          alert("Message sent successfully!");
+          toast.success("Message sent successfully!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+          });
           form.current.reset();
           setFormData({
             fullname: "",
@@ -75,7 +87,18 @@ const App = () => {
           });
         },
         (error) => {
-          alert("Failed to send message. Please try again later.", error);
+          console.error("Failed to send message:", error);
+          toast.error("Failed to send message. Please try again later.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+          });
         }
       )
       .finally(() => {
@@ -87,6 +110,20 @@ const App = () => {
     return `form-control ${value ? "has-value" : ""}`;
   };
 
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
   return (
     <>
       {/* Header */}
@@ -96,11 +133,11 @@ const App = () => {
             <img src={profile} width="100%" alt="Profile" />
           </div>
 
-          <h5 className="title text-white">
+          <h5 className="title text-light">
             Hi, I'm {profileData.username} 👋
           </h5>
           <h6 className="subtitle">{profileData.position}</h6>
-          <p className="description lh-base text-white px-md-5">
+          <p className="description lh-base text-light px-md-5">
             {profileData.short_description}
           </p>
           <div className="row g-2">
@@ -112,16 +149,13 @@ const App = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="#212529"
-                  stroke="#212529"
-                  strokeWidth="1.5"
-                  className="bi bi-download"
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                  className="bi bi-cloud-arrow-down-fill"
                   viewBox="0 0 16 16"
                 >
-                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
-                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                  <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2m2.354 6.854-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708" />
                 </svg>
                 &nbsp;&nbsp;Download CV
               </a>
@@ -136,7 +170,6 @@ const App = () => {
                   width="16"
                   height="16"
                   fill="currentColor"
-                  strokeWidth="1.5"
                   className="bi bi-briefcase-fill"
                   viewBox="0 0 16 16"
                 >
@@ -149,7 +182,7 @@ const App = () => {
           </div>
           <a
             href="#about"
-            className="text-down text-white d-flex justify-content-center align-items-center gap-2"
+            className="text-down text-light d-flex justify-content-center align-items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +237,7 @@ const App = () => {
 
                   <div className="d-flex flex-column flex-sm-row justify-content-start justify-content-sm-between align-items-start w-100">
                     <div>
-                      <h6 className="fs-6 fw-bold text-white mb-0">
+                      <h6 className="fs-6 fw-bold text-light mb-0">
                         {project.name}
                       </h6>
                       <small className="text-light">{project.position}</small>
@@ -292,7 +325,7 @@ const App = () => {
                       alt={`Logo ${skill.name}`}
                     />
                   </div>
-                  <small className="text-white">{skill.name}</small>
+                  <small className="text-light">{skill.name}</small>
                 </div>
               </SplideSlide>
             ))}
@@ -327,7 +360,7 @@ const App = () => {
 
                   <div className="d-flex flex-column flex-sm-row justify-content-start justify-content-sm-between align-items-start w-100">
                     <div>
-                      <h6 className="fs-6 fw-bold text-white mb-0">
+                      <h6 className="fs-6 fw-bold text-light mb-0">
                         {education.name}
                       </h6>
                       <small className="text-light">{education.position}</small>
@@ -429,6 +462,64 @@ const App = () => {
           </form>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-transparent text-light py-4">
+        <div className="container text-center d-sm-none">
+          <p className="mb-0">
+            Copyright © {new Date().getFullYear()} Azzmnrdev.
+            <br />
+            All rights reserved.
+          </p>
+        </div>
+
+        <div className="container text-center d-none d-sm-block">
+          <p className="mb-0">
+            Copyright © {new Date().getFullYear()} Azzmnrdev. All rights
+            reserved.
+          </p>
+        </div>
+      </footer>
+
+      {/* Button to top */}
+      <button
+        className="btn p-0 d-none d-sm-flex align-items-sm-center justify-content-sm-center"
+        style={{
+          right: "20px",
+          width: "40px",
+          border: "none",
+          height: "40px",
+          bottom: "20px",
+          outline: "none",
+          color: "#212529",
+          cursor: "pointer",
+          position: "fixed",
+          backgroundColor: "#32cd32",
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
+        }}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+          className="bi bi-chevron-up"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fillRule="evenodd"
+            d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"
+          />
+        </svg>
+      </button>
+
+      {/* Toast Container */}
+      <ToastContainer />
     </>
   );
 };
