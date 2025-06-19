@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+*,
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #212529 !important;
+}
+
+/* Header */
+#header {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+}
+
+#header .container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#header .image-wrapper {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+}
+
+#header .title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+#header .subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #32cd32;
+}
+
+#header .description {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+#header .title,
+#header .subtitle,
+#header .description {
+  text-align: center;
+}
+
+#header a.btn-cv {
+  border-color: #32cd32;
+  background-color: #32cd32;
+}
+
+#header a.btn-cv:hover {
+  border-color: #28a745;
+  background-color: #28a745;
+}
+
+#header a.btn-project {
+  color: #32cd32;
+  border-color: #32cd32;
+  background-color: transparent;
+}
+
+#header a.btn-project:hover {
+  color: #212529;
+  border-color: #32cd32;
+  background-color: #32cd32;
+}
+
+#header a.text-down {
+  margin-top: 4rem;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+/* Work Experience */
+#experience .accordion-custom {
+  background-color: #343a40;
+}
+
+#experience .accordion-custom:hover {
+  cursor: pointer;
+}
+
+#experience .accordion-custom .custom-bullet-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+#experience .accordion-custom .custom-bullet-list li {
+  position: relative;
+  padding-left: 1.2em;
+  margin-bottom: 0.4em;
+}
+
+#experience .accordion-custom .custom-bullet-list li::before {
+  left: 0;
+  content: "•";
+  color: white;
+  font-weight: bold;
+  position: absolute;
+}
+
+/* Education */
+#education .accordion-custom {
+  background-color: #343a40;
+}
+
+#education .accordion-custom:hover {
+  cursor: pointer;
+}
+
+#education .accordion-custom h6 {
+  line-clamp: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+
+/* Contact */
+#contact {
+  padding-top: 5rem;
+}
+
+#contact .container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#contact .title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #32cd32;
+  margin-bottom: 1rem;
+}
+
+#contact .description {
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+}
+
+#contact .form-control {
+  color: #212529;
+  border: none !important;
+  padding: 1rem !important;
+  font-size: 18px !important;
+  border-radius: 0.75rem !important;
+  background-color: #f7f7fa !important;
+}
+
+.form-control::placeholder {
+  color: #212529 !important;
+}
+
+#contact .form-control:hover,
+#contact .form-control:focus {
+  box-shadow: none !important;
+  background-color: #e5fae5 !important;
+}
+
+#contact form .form-control.has-value {
+  background-color: #e5fae5 !important;
+}
+
+#contact .btn-custom {
+  display: flex;
+  padding: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  align-items: center;
+  border-radius: 0.75rem;
+  border-color: #32cd32;
+  background-color: #32cd32;
+}
+
+#contact .btn-custom:hover {
+  color: #212529;
+}
+
+/* Footer */
+
+/* Section Title */
+#about .section-title,
+#experience .section-title,
+#projects .section-title,
+#skills .section-title,
+#education .section-title,
+#contact .section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #32cd32;
+}
+
+/* Breakpoints */
+@media (min-width: 576px) {
+  #header .title {
+    font-size: 24px;
+  }
+
+  #header .subtitle {
+    font-size: 20px;
+  }
+
+  #experience .accordion-custom .description {
+    padding-left: 76px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px !important;
+  }
+
+  #header .title {
+    font-size: 28px;
+  }
+
+  #header .subtitle {
+    font-size: 22px;
+  }
+
+  #about .section-title,
+  #experience .section-title,
+  #projects .section-title,
+  #skills .section-title,
+  #education .section-title,
+  #contact .section-title {
+    font-size: 20px;
+  }
+
+  #contact .title {
+    font-size: 30px;
+  }
+
+  #contact .description {
+    font-size: 18px;
+  }
+}
