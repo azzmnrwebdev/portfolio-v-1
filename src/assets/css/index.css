@@ -203,7 +203,20 @@ body {
   color: #212529;
 }
 
-/* Footer */
+/* Menu Bottom */
+#menuBottom .item {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+#menuBottom .item:hover {
+  background-color: #e5fae5;
+}
 
 /* Section Title */
 #about .section-title,
