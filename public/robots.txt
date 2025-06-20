@@ -1,4 +1,2 @@
 User-agent: *
-Disallow:
-
-Sitemap: https://azzmnrdev.com/sitemap.xml
+Allow: /
