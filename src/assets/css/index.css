@@ -17,6 +17,54 @@ body {
   background-color: #212529 !important;
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Loading Screen */
+.loading-screen {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  z-index: 9999;
+  position: fixed;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #e5fae5;
+  transform: translateY(-100%);
+  transition: transform 0.8s ease-in-out;
+}
+
+.loading-screen.show {
+  transform: translateY(0);
+}
+
+.loading-screen.hide {
+  transform: translateY(-100%);
+}
+
+.loading-screen h1 {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.loading-screen p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
 /* Header */
 #header {
   display: flex;
@@ -91,6 +139,7 @@ body {
   margin-top: 4rem;
   text-decoration: none;
   background-color: transparent;
+  animation: float 2.5s ease-in-out infinite;
 }
 
 /* Work Experience */
@@ -246,6 +295,14 @@ body {
 }
 
 @media (min-width: 768px) {
+  .loading-screen h1 {
+    font-size: 30px;
+  }
+
+  .loading-screen p {
+    font-size: 18px;
+  }
+
   .container {
     max-width: 720px !important;
   }

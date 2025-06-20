@@ -15,7 +15,9 @@ const App = () => {
   const descriptionRefs = useRef([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const [activeIndex, setActiveIndex] = useState(null);
+  const [animateClass, setAnimateClass] = useState("");
   const [collapsingIndex, setCollapsingIndex] = useState(null);
   const [formData, setFormData] = useState({
     fullname: "",
@@ -23,6 +25,20 @@ const App = () => {
     subject: "",
     message: "",
   });
+
+  useEffect(() => {
+    setAnimateClass("show");
+
+    const timer = setTimeout(() => {
+      setAnimateClass("hide");
+
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 800);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleDescription = (index) => {
     if (activeIndex === index) {
@@ -126,6 +142,14 @@ const App = () => {
 
   return (
     <>
+      {showLoader && (
+        <div className={`loading-screen ${animateClass}`}>
+          <h1 className="mb-1">Welcome To</h1>
+          <h1 className="mb-2">Portfolio Website</h1>
+          <p className="mb-0">Presented by Muhammad Azzam</p>
+        </div>
+      )}
+
       {/* Header */}
       <header id="header">
         <div className="container">
@@ -204,7 +228,9 @@ const App = () => {
         <div className="container">
           <h2 className="section-title mb-3">About Me</h2>
           <div
-            dangerouslySetInnerHTML={{ __html: profileData.long_description }}
+            dangerouslySetInnerHTML={{
+              __html: profileData.long_description,
+            }}
           />
         </div>
       </section>
@@ -251,7 +277,10 @@ const App = () => {
 
                 <div
                   ref={(el) => (descriptionRefs.current[index] = el)}
-                  style={{ overflow: "hidden", transition: "height 0.4s ease" }}
+                  style={{
+                    overflow: "hidden",
+                    transition: "height 0.4s ease",
+                  }}
                 >
                   <div
                     className={`description ${
@@ -259,7 +288,9 @@ const App = () => {
                         ? "pt-3 pt-sm-0"
                         : ""
                     }`}
-                    dangerouslySetInnerHTML={{ __html: project.description }}
+                    dangerouslySetInnerHTML={{
+                      __html: project.description,
+                    }}
                   />
                 </div>
               </div>
