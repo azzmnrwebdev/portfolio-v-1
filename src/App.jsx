@@ -5,8 +5,10 @@ import emailjs from "@emailjs/browser";
 import profileData from "./utils/Profile";
 import educations from "./utils/Educations";
 import Experiences from "./utils/Experiences";
+import { tabs, projects } from "./utils/Projects";
 import profile from "./assets/images/profile.jpeg";
 import { useEffect, useRef, useState } from "react";
+import NoThumbnail from "./assets/images/projects/empty.png";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 
@@ -16,6 +18,7 @@ const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
   const [animateClass, setAnimateClass] = useState("");
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -23,6 +26,7 @@ const App = () => {
     message: "",
   });
 
+  // Loading Screen
   useEffect(() => {
     setAnimateClass("show");
 
@@ -37,6 +41,12 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Project
+  const filteredProjects = projects.filter(
+    (project) => project.tabId === activeTab
+  );
+
+  // Contact
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -100,6 +110,7 @@ const App = () => {
     return `form-control ${value ? "has-value" : ""}`;
   };
 
+  // Button To Top
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) {
@@ -210,7 +221,7 @@ const App = () => {
       </section>
 
       {/* Work Experience */}
-      <section id="experience" className="pt-4">
+      <section id="experience" style={{ paddingTop: "2rem" }}>
         <div className="container">
           <h2 className="section-title mb-3">Work Experience</h2>
 
@@ -261,14 +272,79 @@ const App = () => {
       </section>
 
       {/* Projects */}
-      <section id="projects" className="pt-4">
+      <section id="projects">
         <div className="container">
-          <h2 className="section-title mb-3">My Projects</h2>
+          <h1 className="title">My Projects</h1>
+          <p className="description">
+            Koleksi proyek yang pernah saya buat selama bekerja.
+          </p>
+
+          {/* Tabs */}
+          <div
+            id="tabs"
+            style={{ backgroundColor: "#343a40", scrollbarWidth: "none" }}
+            className="py-3 rounded-top-4 d-flex flex-nowrap justify-content-around align-items-center overflow-auto mt-4"
+          >
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                className={`tabs-button bg-transparent border-0 text-light text-nowrap px-4 ${
+                  activeTab === tab.id ? "active" : ""
+                }`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </div>
+
+          {/* List Data */}
+          <div className="mt-3">
+            {filteredProjects.length > 0 ? (
+              <div className="row row-cols-1 row-cols-sm-2 g-3 g-sm-2">
+                {filteredProjects.map((project, index) => {
+                  const thumbnail = project.files.find(
+                    (file) => file.isThumbnail
+                  );
+
+                  const imageSrc =
+                    project.files.length === 0 || !thumbnail
+                      ? NoThumbnail
+                      : thumbnail.path;
+
+                  return (
+                    <div key={index} className="col">
+                      <div className="card border-0 rounded-0 bg-transparent">
+                        <div className="card-body p-0">
+                          <div className="ratio ratio-16x9 mb-3">
+                            <img
+                              src={imageSrc}
+                              style={{ objectPosition: "top" }}
+                              className="img-fluid object-fit-cover rounded-3"
+                              alt="Thumbnail"
+                            />
+                          </div>
+                          <h5 className="card-title text-light lh-base">
+                            {project.name}
+                          </h5>
+                          <p className="card-text text-light mb-0">
+                            {project.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p>Tidak ada project untuk kategori ini</p>
+            )}
+          </div>
         </div>
       </section>
 
       {/* Skills */}
-      <section id="skills" className="pt-4">
+      <section id="skills" style={{ paddingTop: "0" }}>
         <div className="container">
           <h2 className="section-title mb-3">Skills & Tools</h2>
 
@@ -326,7 +402,7 @@ const App = () => {
       </section>
 
       {/* Education */}
-      <section id="education" className="pt-4">
+      <section id="education" style={{ paddingTop: "2rem" }}>
         <div className="container">
           <h2 className="section-title mb-3">Education</h2>
 

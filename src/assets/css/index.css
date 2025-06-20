@@ -166,6 +166,86 @@ body {
   position: absolute;
 }
 
+/* My Projects */
+#projects {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+#projects .title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #32cd32;
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+#projects .description {
+  font-size: 16px;
+  font-weight: 400;
+  color: #f8f9fa;
+  text-align: right;
+}
+
+#projects #tabs .tabs-button.active {
+  position: relative;
+}
+
+#projects #tabs .tabs-button.active::after {
+  left: 0;
+  width: 100%;
+  content: "";
+  height: 3px;
+  bottom: -1rem;
+  position: absolute;
+  background-color: #32cd32;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#projects #tabs .tabs-button.active::after {
+  width: 100%;
+  animation: underline 0.3s forwards;
+}
+
+#projects .card:hover {
+  cursor: pointer;
+}
+
+#projects .card .card-body .card-title {
+  line-clamp: 2;
+  font-size: 16px;
+  min-height: 54px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+
+#projects .card .card-body .card-text {
+  line-clamp: 3;
+  font-size: 14px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+
+@keyframes underline {
+  from {
+    width: 0;
+    left: 50%;
+  }
+  to {
+    width: 100%;
+    left: 0;
+  }
+}
+
 /* Education */
 #education .accordion-custom {
   background-color: #343a40;
@@ -314,6 +394,22 @@ body {
   #education .section-title,
   #contact .section-title {
     font-size: 20px;
+  }
+
+  #projects .title {
+    font-size: 30px;
+  }
+
+  #projects .description {
+    font-size: 18px;
+  }
+
+  #projects .card .card-body .card-title {
+    font-size: 18px;
+  }
+
+  #projects .card .card-body .card-text {
+    font-size: 16px;
   }
 
   #contact .title {
