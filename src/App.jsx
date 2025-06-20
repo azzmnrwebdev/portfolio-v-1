@@ -12,13 +12,10 @@ import { ToastContainer, Bounce, toast } from "react-toastify";
 
 const App = () => {
   const form = useRef();
-  const descriptionRefs = useRef([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
-  const [activeIndex, setActiveIndex] = useState(null);
   const [animateClass, setAnimateClass] = useState("");
-  const [collapsingIndex, setCollapsingIndex] = useState(null);
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -39,29 +36,6 @@ const App = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const toggleDescription = (index) => {
-    if (activeIndex === index) {
-      setCollapsingIndex(index);
-      setTimeout(() => setCollapsingIndex(null), 400);
-      setActiveIndex(null);
-    } else {
-      setActiveIndex(index);
-    }
-  };
-
-  useEffect(() => {
-    Experiences.forEach((_, i) => {
-      const el = descriptionRefs.current[i];
-      if (!el) return;
-
-      if (activeIndex === i) {
-        el.style.height = el.scrollHeight + "px";
-      } else {
-        el.style.height = "0px";
-      }
-    });
-  }, [activeIndex]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -249,7 +223,6 @@ const App = () => {
             return (
               <div
                 key={index}
-                onClick={() => toggleDescription(index)}
                 className={`py-3 px-3 px-sm-4 rounded-3 accordion-custom ${classMargin}`}
               >
                 <div className="d-flex justify-content-start align-items-start gap-3">
@@ -276,23 +249,11 @@ const App = () => {
                 </div>
 
                 <div
-                  ref={(el) => (descriptionRefs.current[index] = el)}
-                  style={{
-                    overflow: "hidden",
-                    transition: "height 0.4s ease",
+                  className="pt-3 pt-sm-0 description"
+                  dangerouslySetInnerHTML={{
+                    __html: project.description,
                   }}
-                >
-                  <div
-                    className={`description ${
-                      activeIndex === index || collapsingIndex === index
-                        ? "pt-3 pt-sm-0"
-                        : ""
-                    }`}
-                    dangerouslySetInnerHTML={{
-                      __html: project.description,
-                    }}
-                  />
-                </div>
+                />
               </div>
             );
           })}
