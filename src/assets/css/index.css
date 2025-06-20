@@ -147,10 +147,6 @@ body {
   background-color: #343a40;
 }
 
-#experience .accordion-custom:hover {
-  cursor: pointer;
-}
-
 #experience .accordion-custom .custom-bullet-list {
   padding-left: 0;
   list-style: none;
@@ -173,10 +169,6 @@ body {
 /* Education */
 #education .accordion-custom {
   background-color: #343a40;
-}
-
-#education .accordion-custom:hover {
-  cursor: pointer;
 }
 
 #education .accordion-custom h6 {
