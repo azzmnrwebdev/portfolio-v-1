@@ -103,6 +103,7 @@ body {
 
 #header .description {
   font-size: 16px;
+  color: #dee2e6;
   font-weight: 400;
   margin-bottom: 0;
 }
@@ -136,6 +137,7 @@ body {
 }
 
 #header a.text-down {
+  color: #dee2e6;
   margin-top: 4rem;
   text-decoration: none;
   background-color: transparent;
@@ -161,7 +163,7 @@ body {
 #experience .accordion-custom .custom-bullet-list li::before {
   left: 0;
   content: "•";
-  color: #f8f9fa;
+  color: #dee2e6;
   font-weight: bold;
   position: absolute;
 }
@@ -177,15 +179,15 @@ body {
   font-size: 26px;
   font-weight: 600;
   color: #32cd32;
-  text-align: right;
+  text-align: center;
   margin-bottom: 1rem;
 }
 
 #projects .description {
   font-size: 16px;
   font-weight: 400;
-  color: #f8f9fa;
-  text-align: right;
+  color: #dee2e6;
+  text-align: center;
 }
 
 #projects #tabs .tabs-button.active {
@@ -216,8 +218,8 @@ body {
 
 #projects .card .card-body .card-title {
   line-clamp: 2;
-  font-size: 16px;
-  min-height: 54px;
+  font-size: 18px;
+  font-weight: 400;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -226,11 +228,12 @@ body {
 }
 
 #projects .card .card-body .card-text {
-  line-clamp: 3;
-  font-size: 14px;
+  line-clamp: 2;
+  font-size: 15px;
   overflow: hidden;
+  color: #dee2e6;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
 }
@@ -282,7 +285,7 @@ body {
 #contact .description {
   font-size: 16px;
   font-weight: 400;
-  color: #f8f9fa;
+  color: #dee2e6;
   text-align: center;
 }
 
@@ -292,7 +295,7 @@ body {
   padding: 1rem !important;
   font-size: 18px !important;
   border-radius: 0.75rem !important;
-  background-color: #f7f7fa !important;
+  background-color: #dee2e6 !important;
 }
 
 .form-control::placeholder {
@@ -402,14 +405,6 @@ body {
 
   #projects .description {
     font-size: 18px;
-  }
-
-  #projects .card .card-body .card-title {
-    font-size: 18px;
-  }
-
-  #projects .card .card-body .card-text {
-    font-size: 16px;
   }
 
   #contact .title {

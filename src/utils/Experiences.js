@@ -7,7 +7,7 @@ const Experiences = [
     position: "IT Programmer",
     date: "Okt 2023 - Mar 2025",
     description: `
-      <ul class="custom-bullet-list mb-0 text-white">
+      <ul class="custom-bullet-list mb-0" style="color: #dee2e6">
         <li><small>Membangun web profil perusahaan menggunakan WordPress.</small></li>
         <li><small>Membangun web menggunakan Laravel, Bootstrap, JQuery dan React JS.</small></li>
         <li><small>Merancang struktur dan relasi tabel dalam basis data PostgreSQL.</small></li>
