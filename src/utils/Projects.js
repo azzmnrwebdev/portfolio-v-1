@@ -1,6 +1,7 @@
 import Relokasi from "../assets/images/projects/relokasi/thumbnail.png";
 import Jamnation from "../assets/images/projects/jamnation/thumbnail.png";
 import Portfolio from "../assets/images/projects/portfolio/thumbnail.png";
+import JamnationVideo from "../assets/images/projects/jamnation/Demo.mp4";
 import Cheriewish from "../assets/images/projects/cheriewish/thumbnail.png";
 import AstraAwards from "../assets/images/projects/astra-awards/thumbnail.png";
 
@@ -83,7 +84,7 @@ const projects = [
     role: "Full Stack Developer",
     client: "Yayasan Amaliah Astra (YAA)",
     period: "August 2024 - November 2024",
-    technology: "Laravel 11, Bootstrap, PostgreSQL",
+    technology: "Laravel 11, Bootstrap 5, PostgreSQL",
     link_demo: null,
     link_github: null,
     status_demo: "Internal Use Only",
@@ -113,6 +114,11 @@ const projects = [
         type: "image",
         path: Jamnation,
         isThumbnail: true,
+      },
+      {
+        type: "video",
+        path: JamnationVideo,
+        isThumbnail: false,
       },
     ],
   },

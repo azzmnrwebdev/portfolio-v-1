@@ -807,17 +807,37 @@ const App = () => {
 
             <div className="bottom-sheet-body">
               <div className="ratio ratio-16x9 mb-4">
-                <img
-                  src={
-                    activeProject.files.length === 0 ||
-                    !activeProject.files.find((f) => f.isThumbnail)
-                      ? NoThumbnail
-                      : activeProject.files.find((f) => f.isThumbnail).path
-                  }
-                  style={{ objectPosition: "top" }}
-                  className="img-fluid object-fit-cover rounded-3"
-                  alt="Thumbnail"
-                />
+                {activeProject.files.some((f) => f.type === "video") ? (
+                  <video controls className="object-fit-contain bg-dark rounded-3">
+                    <source
+                      src={
+                        activeProject.files.find((f) => f.type === "video").path
+                      }
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : activeProject.files.some(
+                    (f) => f.type === "image" && f.isThumbnail
+                  ) ? (
+                  <img
+                    src={
+                      activeProject.files.find(
+                        (f) => f.type === "image" && f.isThumbnail
+                      ).path
+                    }
+                    style={{ objectPosition: "top" }}
+                    className="img-fluid object-fit-cover rounded-3"
+                    alt="Thumbnail"
+                  />
+                ) : (
+                  <img
+                    src={NoThumbnail}
+                    style={{ objectPosition: "top" }}
+                    className="img-fluid object-fit-cover rounded-3"
+                    alt="No Thumbnail"
+                  />
+                )}
               </div>
 
               <div
