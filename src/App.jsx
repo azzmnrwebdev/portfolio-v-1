@@ -19,6 +19,8 @@ const App = () => {
   const [showLoader, setShowLoader] = useState(true);
   const [animateClass, setAnimateClass] = useState("");
   const [activeTab, setActiveTab] = useState(tabs[0].id);
+  const [activeProject, setActiveProject] = useState(null);
+  const [showBottomSheet, setShowBottomSheet] = useState(false);
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -45,6 +47,29 @@ const App = () => {
   const filteredProjects = projects.filter(
     (project) => project.tabId === activeTab
   );
+
+  const handleProjectClick = (project) => {
+    setActiveProject(project);
+    setShowBottomSheet(true);
+  };
+
+  const handleCloseBottomSheet = () => {
+    const bottomSheet = document.querySelector(".bottom-sheet");
+    const overlay = document.querySelector(".bottom-sheet-overlay");
+
+    if (bottomSheet && overlay) {
+      bottomSheet.classList.add("closing");
+      overlay.classList.add("closing");
+
+      setTimeout(() => {
+        setShowBottomSheet(false);
+        setActiveProject(null);
+
+        bottomSheet.classList.remove("closing");
+        overlay.classList.remove("closing");
+      }, 300);
+    }
+  };
 
   // Contact
   const handleInputChange = (e) => {
@@ -322,7 +347,10 @@ const App = () => {
 
                   return (
                     <div key={index} className="col">
-                      <div className="card border-0 rounded-0 bg-transparent">
+                      <div
+                        className="card border-0 rounded-0 bg-transparent"
+                        onClick={() => handleProjectClick(project)}
+                      >
                         <div className="card-body p-0">
                           <div className="ratio ratio-16x9 mb-3">
                             <img
@@ -352,7 +380,7 @@ const App = () => {
                                   >
                                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
                                   </svg>
-                                  &nbsp;&nbsp;source code
+                                  &nbsp;&nbsp;source
                                 </a>
                               )}
                               {project.link_demo && (
@@ -373,7 +401,7 @@ const App = () => {
                                   >
                                     <path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5M2 2h12s2 0 2 2v6s0 2-2 2H2s-2 0-2-2V4s0-2 2-2" />
                                   </svg>
-                                  &nbsp;&nbsp;live demo
+                                  &nbsp;&nbsp;demo
                                 </a>
                               )}
                             </div>
@@ -646,7 +674,7 @@ const App = () => {
       <div className="container">
         <div
           id="menuBottom"
-          className="d-flex flex-nowrap justify-content-center align-items-center gap-1 bg-white p-2 rounded-pill"
+          className="d-flex flex-nowrap justify-content-center align-items-center gap-1 bg-light p-2 rounded-pill"
           style={{
             left: "50%",
             bottom: "20px",
@@ -748,6 +776,203 @@ const App = () => {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* Bottom Sheet */}
+      <div
+        className={`bottom-sheet-overlay ${showBottomSheet ? "show" : ""}`}
+        onClick={handleCloseBottomSheet}
+      />
+
+      <div className={`bottom-sheet ${showBottomSheet ? "show" : ""}`}>
+        {activeProject && (
+          <>
+            <div className="bottom-sheet-header d-flex justify-content-between align-items-center">
+              <h5 className="mb-0 fw-bold">{activeProject.name}</h5>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="none"
+                className="bi bi-x-lg"
+                viewBox="0 0 16 16"
+                stroke="currentColor"
+                strokeWidth="1"
+                onClick={handleCloseBottomSheet}
+                style={{ cursor: "pointer" }}
+              >
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+              </svg>
+            </div>
+
+            <div className="bottom-sheet-body">
+              <div className="ratio ratio-16x9 mb-4">
+                <img
+                  src={
+                    activeProject.files.length === 0 ||
+                    !activeProject.files.find((f) => f.isThumbnail)
+                      ? NoThumbnail
+                      : activeProject.files.find((f) => f.isThumbnail).path
+                  }
+                  style={{ objectPosition: "top" }}
+                  className="img-fluid object-fit-cover rounded-3"
+                  alt="Thumbnail"
+                />
+              </div>
+
+              <div
+                className="table-responsive mb-4"
+                style={{ scrollbarWidth: "none" }}
+              >
+                <table className="table table-borderless text-nowrap mb-0">
+                  <tbody>
+                    <tr>
+                      <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-person-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                        Role
+                      </td>
+                      <td className="px-1 py-1">:</td>
+                      <td className="px-0 py-1">{activeProject.role}</td>
+                    </tr>
+                    <tr>
+                      <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-person-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                        Client
+                      </td>
+                      <td className="px-1 py-1">:</td>
+                      <td className="px-0 py-1">{activeProject.client}</td>
+                    </tr>
+                    <tr>
+                      <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-calendar-event"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                        </svg>
+                        Period
+                      </td>
+                      <td className="px-1 py-1">:</td>
+                      <td className="px-0 py-1">{activeProject.period}</td>
+                    </tr>
+                    <tr>
+                      <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-wrench-adjustable"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
+                          <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                        </svg>
+                        Technology
+                      </td>
+                      <td className="px-1 py-1">:</td>
+                      <td className="px-0 py-1">{activeProject.technology}</td>
+                    </tr>
+                    <tr>
+                      <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-link-45deg"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                          <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                        </svg>
+                        Demo
+                      </td>
+                      <td className="px-1 py-1">:</td>
+                      <td className="px-0 py-1">
+                        {activeProject.link_demo ? (
+                          <a
+                            href={activeProject.link_demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-decoration-none"
+                          >
+                            {activeProject.link_demo}
+                          </a>
+                        ) : (
+                          <span className="text-danger">
+                            {activeProject.status_demo}
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-link-45deg"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                          <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                        </svg>
+                        Github
+                      </td>
+                      <td className="px-1 py-1">:</td>
+                      <td className="px-0 py-1">
+                        {activeProject.link_github ? (
+                          <a
+                            href={activeProject.link_github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-decoration-none"
+                          >
+                            {activeProject.link_github}
+                          </a>
+                        ) : (
+                          <span className="text-danger">
+                            {activeProject.status_github}
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="description">
+                <h6 style={{ fontSize: "18px" }}>Description</h6>
+                <p className="mb-0">{activeProject.description}</p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Toast Container */}

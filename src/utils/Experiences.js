@@ -4,7 +4,7 @@ const Experiences = [
   {
     logo: Tetamba,
     name: "Tetamba Studio Kreasi",
-    position: "IT Programmer",
+    position: "Full Stack Developer",
     date: "Okt 2023 - Mar 2025",
     description: `
       <ul class="custom-bullet-list mb-0" style="color: #dee2e6">
