@@ -808,15 +808,19 @@ const App = () => {
             <div className="bottom-sheet-body">
               <div className="ratio ratio-16x9 mb-4">
                 {activeProject.files.some((f) => f.type === "video") ? (
-                  <video controls className="object-fit-contain bg-dark rounded-3">
-                    <source
-                      src={
-                        activeProject.files.find((f) => f.type === "video").path
-                      }
-                      type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                  </video>
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={
+                      activeProject.files.find((f) => f.type === "video").path
+                    }
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                    className="rounded-3"
+                  ></iframe>
                 ) : activeProject.files.some(
                     (f) => f.type === "image" && f.isThumbnail
                   ) ? (

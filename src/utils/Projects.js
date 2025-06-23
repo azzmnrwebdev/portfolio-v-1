@@ -1,7 +1,6 @@
 import Relokasi from "../assets/images/projects/relokasi/thumbnail.png";
 import Jamnation from "../assets/images/projects/jamnation/thumbnail.png";
 import Portfolio from "../assets/images/projects/portfolio/thumbnail.png";
-import JamnationVideo from "../assets/images/projects/jamnation/Demo.mp4";
 import Cheriewish from "../assets/images/projects/cheriewish/thumbnail.png";
 import AstraAwards from "../assets/images/projects/astra-awards/thumbnail.png";
 
@@ -117,7 +116,7 @@ const projects = [
       },
       {
         type: "video",
-        path: JamnationVideo,
+        path: "https://www.youtube.com/embed/hVaArqUgFfo?si=LN_ai7dBEVm2Vj20",
         isThumbnail: false,
       },
     ],
