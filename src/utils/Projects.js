@@ -41,7 +41,7 @@ const projects = [
     name: "Cheriewish",
     description: `Website ini dibuat sebagai media untuk memperkenalkan brand Cheriewish kepada publik, sekaligus menampilkan berbagai produk fashion muslim yang dirancang secara eksklusif oleh mereka. Melalui website ini, pengunjung dapat melihat detail lengkap dari setiap produk, mulai dari deskripsi, bahan, ukuran, hingga tampilan visual berupa foto produk yang jelas dan menarik. Selain itu, tersedia katalog produk yang memudahkan pengunjung dalam menjelajahi koleksi-koleksi Cheriewish. Untuk proses pembelian, pengunjung akan diarahkan secara otomatis ke platform e-commerce Shopee sebagai mitra penjualan resmi. Tak hanya itu, website ini juga memuat dokumentasi kegiatan Cheriewish dalam bentuk foto dan video, seperti sesi pemotretan, peluncuran koleksi terbaru, hingga partisipasi dalam berbagai acara, guna menunjukkan komitmen dan perkembangan brand dalam industri fashion tanah air.`,
     role: "Frontend Developer",
-    client: "Lovina Aulia",
+    client: "Tim Cheriewish",
     period: "June 2025",
     technology: "React JS, Bootstrap 5",
     link_demo: "https://cheriewish.vercel.app/",
