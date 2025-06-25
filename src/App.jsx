@@ -435,12 +435,12 @@ const App = () => {
 
                   return (
                     <div key={index} className="col">
-                      <div
-                        className="card border-0 rounded-0 bg-transparent"
-                        onClick={() => handleProjectClick(project)}
-                      >
+                      <div className="card border-0 rounded-0 bg-transparent">
                         <div className="card-body p-0">
-                          <div className="ratio ratio-16x9 mb-3">
+                          <div
+                            className="ratio ratio-16x9 mb-3"
+                            onClick={() => handleProjectClick(project)}
+                          >
                             <img
                               src={imageSrc}
                               style={{ objectPosition: "top" }}
@@ -494,7 +494,10 @@ const App = () => {
                               )}
                             </div>
                           )}
-                          <h5 className="card-title text-light lh-base">
+                          <h5
+                            className="card-title text-light lh-base"
+                            onClick={() => handleProjectClick(project)}
+                          >
                             {project.name}
                           </h5>
                           <p className="card-text lh-base">

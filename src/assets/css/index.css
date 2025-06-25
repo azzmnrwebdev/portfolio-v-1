@@ -212,8 +212,31 @@ body {
   animation: underline 0.3s forwards;
 }
 
-#projects .card:hover {
+#projects .card-body img,
+#projects .card .card-body a,
+#projects .card .card-body .card-title {
+  transition: color 0.3s ease-in-out;
+}
+
+#projects .card-body img {
+  filter: grayscale(100%);
+}
+
+#projects .card:hover .card-body img {
+  filter: grayscale(0%);
+}
+
+#projects .card:hover .card-body img,
+#projects .card:hover .card-body .card-title {
   cursor: pointer;
+}
+
+#projects .card:hover .card-body a {
+  color: #dee2e6 !important;
+}
+
+#projects .card:hover .card-body .card-title {
+  color: #32cd32 !important;
 }
 
 #projects .card .card-body .card-title {
@@ -228,12 +251,12 @@ body {
 }
 
 #projects .card .card-body .card-text {
-  line-clamp: 2;
+  line-clamp: 3;
   font-size: 15px;
   overflow: hidden;
   color: #dee2e6;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
 }
