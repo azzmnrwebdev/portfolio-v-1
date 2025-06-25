@@ -982,7 +982,11 @@ const App = () => {
                         {t("bottomSheetPeriod")}
                       </td>
                       <td className="px-1 py-1">:</td>
-                      <td className="px-0 py-1">{activeProject.period}</td>
+                      <td className="px-0 py-1">
+                        {isEnglish
+                          ? activeProject.period_en
+                          : activeProject.period_id}
+                      </td>
                     </tr>
                     <tr>
                       <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
@@ -1030,7 +1034,9 @@ const App = () => {
                           </a>
                         ) : (
                           <span className="text-danger">
-                            {activeProject.status_demo}
+                            {isEnglish
+                              ? activeProject.status_demo_en
+                              : activeProject.status_demo_id}
                           </span>
                         )}
                       </td>
@@ -1063,7 +1069,9 @@ const App = () => {
                           </a>
                         ) : (
                           <span className="text-danger">
-                            {activeProject.status_github}
+                            {isEnglish
+                              ? activeProject.status_github_en
+                              : activeProject.status_github_id}
                           </span>
                         )}
                       </td>
