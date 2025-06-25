@@ -1,3 +1,4 @@
+import i18n from "i18next";
 import "./assets/css/index.css";
 import "@splidejs/react-splide/css";
 import skills from "./utils/Skills";
@@ -12,10 +13,77 @@ import NoThumbnail from "./assets/images/projects/empty.png";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import EnglishFlag from "./assets/images/language/english.png";
+import { useTranslation, initReactI18next } from "react-i18next";
 import IndonesianFlag from "./assets/images/language/indonesia.png";
+
+i18n.use(initReactI18next).init({
+  resources: {
+    id: {
+      translation: {
+        headerTitle: "Hai, saya",
+        headerDescription: profileData.short_description_id,
+        titleBtnCV: "Unduh CV",
+        titleBtnProject: "Jelajahi Proyek",
+        titleBtnScrollDown: "Klik untuk info lebih lanjut",
+        aboutTitle: "Tentang Saya",
+        aboutContent: profileData.long_description_id,
+        experienceTitle: "Pengalaman Kerja",
+        projectTitle: "Proyek Saya",
+        projectDescription:
+          "Jelajahi proyek yang telah saya kerjakan sejauh ini.",
+        projectSource: "sumber",
+        projectResult: "hasil",
+        skillTitle: "Keahlian & Alat",
+        educationTitle: "Pendidikan",
+        contactTitle: "Mari Bekerja Sama",
+        contactDescription: `Ada proyek atau ide yang ingin dikembangkan? Saya terbuka untuk
+            ngobrol lebih lanjut, saya akan dengan senang hati berkolaborasi
+            untuk mewujudkannya bersama Anda.`,
+        inputFullname: "nama lengkap",
+        inputEmail: "alamat email",
+        inputSubject: "subjek",
+        inputMessage: "pesan",
+        titleBtnContact: "Kirim Pesan",
+        titleBtnContactLoading: "Mengirim...",
+      },
+    },
+    en: {
+      translation: {
+        headerTitle: "Hi, I'm",
+        headerDescription: profileData.short_description_en,
+        titleBtnCV: "Download CV",
+        titleBtnProject: "Explore Projects",
+        titleBtnScrollDown: "Click here for more",
+        aboutTitle: "About Me",
+        aboutContent: profileData.long_description_en,
+        experienceTitle: "Work Experience",
+        projectTitle: "My Projects",
+        projectDescription: "Explore the projects I've worked on so far.",
+        projectSource: "source",
+        projectResult: "result",
+        skillTitle: "Skills & Tools",
+        educationTitle: "Education",
+        contactTitle: "Let's Work Together",
+        contactDescription: `Got a project or idea you want to work on? Let's chat. I'd love to collaborate and bring it to life together!`,
+        inputFullname: "full name",
+        inputEmail: "email address",
+        inputSubject: "subject",
+        inputMessage: "message",
+        titleBtnContact: "Send Message",
+        titleBtnContactLoading: "Sending...",
+      },
+    },
+  },
+  lng: "id",
+  fallbackLng: "en",
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
 const App = () => {
   const form = useRef();
+  const { t, i18n } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isEnglish, setIsEnglish] = useState(false);
@@ -155,16 +223,20 @@ const App = () => {
 
   // Translate
   const toggleLanguage = () => {
-    setIsEnglish(!isEnglish);
+    const newLanguage = isEnglish ? "id" : "en";
+
+    i18n.changeLanguage(newLanguage).then(() => {
+      setIsEnglish(!isEnglish);
+    });
   };
 
   return (
     <>
       {showLoader && (
         <div className={`loading-screen ${animateClass}`}>
-          <h1 className="mb-1">Selamat Datang Di</h1>
-          <h1 className="mb-2">Situs Web Portofolio</h1>
-          <p className="mb-0">Dipersembahkan Oleh Muhammad Azzam</p>
+          <h1 className="mb-1">Welcome To</h1>
+          <h1 className="mb-2">Portfolio Website</h1>
+          <p className="mb-0">Presented By Muhammad Azzam</p>
         </div>
       )}
 
@@ -176,11 +248,11 @@ const App = () => {
           </div>
 
           <h5 className="title text-light">
-            Hi, I'm {profileData.username} 👋
+            {t("headerTitle")} {profileData.username} 👋
           </h5>
           <h6 className="subtitle">{profileData.position}</h6>
           <p className="description lh-base px-md-5">
-            {profileData.short_description}
+            {t("headerDescription")}
           </p>
           <div className="row g-2">
             <div className="col-auto">
@@ -199,7 +271,7 @@ const App = () => {
                 >
                   <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2m2.354 6.854-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708" />
                 </svg>
-                &nbsp;&nbsp;Download CV
+                &nbsp;&nbsp;{t("titleBtnCV")}
               </a>
             </div>
             <div className="col-auto">
@@ -218,7 +290,7 @@ const App = () => {
                   <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5" />
                   <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85z" />
                 </svg>
-                &nbsp;&nbsp;My Projects
+                &nbsp;&nbsp;{t("titleBtnProject")}
               </a>
             </div>
           </div>
@@ -236,7 +308,7 @@ const App = () => {
             >
               <path d="M3 5a5 5 0 0 1 10 0v6a5 5 0 0 1-10 0zm5.5-1.5a.5.5 0 0 0-1 0v2a.5.5 0 0 0 1 0z" />
             </svg>
-            <small>Click here for more</small>
+            <small>{t("titleBtnScrollDown")}</small>
           </a>
         </div>
       </header>
@@ -244,10 +316,10 @@ const App = () => {
       {/* About */}
       <section id="about" className="pt-5">
         <div className="container">
-          <h2 className="section-title mb-3">About Me</h2>
+          <h2 className="section-title mb-3">{t("aboutTitle")}</h2>
           <div
             dangerouslySetInnerHTML={{
-              __html: profileData.long_description,
+              __html: t("aboutContent"),
             }}
           />
         </div>
@@ -256,10 +328,10 @@ const App = () => {
       {/* Work Experience */}
       <section id="experience" style={{ paddingTop: "2rem" }}>
         <div className="container">
-          <h2 className="section-title mb-3">Work Experience</h2>
+          <h2 className="section-title mb-3">{t("experienceTitle")}</h2>
 
           {/* Accordion */}
-          {Experiences.map((project, index) => {
+          {Experiences.map((experience, index) => {
             const isSingle = Experiences.length === 1;
             const isLast = index === Experiences.length - 1;
             const classMargin = isSingle ? "mb-0" : isLast ? "mb-0" : "mb-3";
@@ -271,25 +343,27 @@ const App = () => {
               >
                 <div className="d-flex justify-content-start align-items-start gap-3">
                   <img
-                    src={project.logo}
+                    src={experience.logo}
                     width="60px"
                     height="60px"
                     className="object-fit-cover rounded"
-                    alt={`Logo ${project.name}`}
+                    alt={`Logo ${experience.name}`}
                   />
 
                   <div className="d-flex flex-column flex-sm-row justify-content-start justify-content-sm-between align-items-start w-100">
                     <div>
                       <h6 className="fs-6 fw-bold text-light mb-0">
-                        {project.name}
+                        {experience.name}
                       </h6>
                       <small style={{ color: "#dee2e6" }}>
-                        {project.position}
+                        {experience.position}
                       </small>
                     </div>
 
                     <small style={{ color: "#dee2e6" }}>
-                      <i>{project.date}</i>
+                      <i>
+                        {isEnglish ? experience.date_en : experience.date_id}
+                      </i>
                     </small>
                   </div>
                 </div>
@@ -297,7 +371,9 @@ const App = () => {
                 <div
                   className="pt-3 pt-sm-0 description"
                   dangerouslySetInnerHTML={{
-                    __html: project.description,
+                    __html: isEnglish
+                      ? experience.description_en
+                      : experience.description_id,
                   }}
                 />
               </div>
@@ -309,16 +385,8 @@ const App = () => {
       {/* Projects */}
       <section id="projects">
         <div className="container">
-          <h1 className="title">My Projects</h1>
-          <p className="description d-sm-none">
-            Jelajahi proyek yang telah
-            <br />
-            saya kerjakan sejauh ini.
-          </p>
-
-          <p className="description d-none d-sm-block">
-            Jelajahi proyek yang telah saya kerjakan sejauh ini.
-          </p>
+          <h1 className="title">{t("projectTitle")}</h1>
+          <p className="description">{t("projectDescription")}</p>
 
           {/* Tabs */}
           <div
@@ -388,7 +456,7 @@ const App = () => {
                                   >
                                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
                                   </svg>
-                                  &nbsp;&nbsp;source
+                                  &nbsp;&nbsp;{t("projectSource")}
                                 </a>
                               )}
                               {project.link_demo && (
@@ -409,7 +477,7 @@ const App = () => {
                                   >
                                     <path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5M2 2h12s2 0 2 2v6s0 2-2 2H2s-2 0-2-2V4s0-2 2-2" />
                                   </svg>
-                                  &nbsp;&nbsp;demo
+                                  &nbsp;&nbsp;{t("projectResult")}
                                 </a>
                               )}
                             </div>
@@ -418,7 +486,9 @@ const App = () => {
                             {project.name}
                           </h5>
                           <p className="card-text lh-base">
-                            {project.description}
+                            {isEnglish
+                              ? project.description_en
+                              : project.description_id}
                           </p>
                         </div>
                       </div>
@@ -436,7 +506,7 @@ const App = () => {
       {/* Skills */}
       <section id="skills" style={{ paddingTop: "0" }}>
         <div className="container">
-          <h2 className="section-title mb-3">Skills & Tools</h2>
+          <h2 className="section-title mb-3">{t("skillTitle")}</h2>
 
           {/* Splide JS */}
           <Splide
@@ -494,7 +564,7 @@ const App = () => {
       {/* Education */}
       <section id="education" style={{ paddingTop: "2rem" }}>
         <div className="container">
-          <h2 className="section-title mb-3">Education</h2>
+          <h2 className="section-title mb-3">{t("educationTitle")}</h2>
 
           {/* List */}
           {educations.map((education, index) => {
@@ -519,15 +589,17 @@ const App = () => {
                   <div className="d-flex flex-column flex-sm-row justify-content-start justify-content-sm-between align-items-start w-100">
                     <div>
                       <h6 className="fs-6 fw-bold text-light mb-0">
-                        {education.name}
+                        {isEnglish ? education.name_en : education.name_id}
                       </h6>
                       <small style={{ color: "#dee2e6" }}>
-                        {education.position}
+                        {isEnglish
+                          ? education.position_en
+                          : education.position_id}
                       </small>
                     </div>
 
                     <small style={{ color: "#dee2e6" }}>
-                      <i>{education.date}</i>
+                      <i>{isEnglish ? education.date_en : education.date_id}</i>
                     </small>
                   </div>
                 </div>
@@ -540,12 +612,8 @@ const App = () => {
       {/* Contact */}
       <section id="contact" className="pb-5">
         <div className="container">
-          <h1 className="title">Let's Work Together</h1>
-          <p className="description">
-            Ada proyek atau ide yang ingin dikembangkan? Saya terbuka untuk
-            ngobrol lebih lanjut, saya akan dengan senang hati berkolaborasi
-            untuk mewujudkannya bersama Anda.
-          </p>
+          <h1 className="title">{t("contactTitle")}</h1>
+          <p className="description">{t("contactDescription")}</p>
 
           <form ref={form} className="row g-3 mt-3" onSubmit={sendEmail}>
             <div className="col-12 col-md-6">
@@ -553,7 +621,7 @@ const App = () => {
                 type="text"
                 name="fullname"
                 className={getInputClassName(formData.fullname)}
-                placeholder="full name"
+                placeholder={t("inputFullname")}
                 required
                 value={formData.fullname}
                 onChange={handleInputChange}
@@ -564,7 +632,7 @@ const App = () => {
                 type="email"
                 name="email"
                 className={getInputClassName(formData.email)}
-                placeholder="email address"
+                placeholder={t("inputEmail")}
                 required
                 value={formData.email}
                 onChange={handleInputChange}
@@ -575,7 +643,7 @@ const App = () => {
                 type="text"
                 name="subject"
                 className={getInputClassName(formData.subject)}
-                placeholder="subject"
+                placeholder={t("inputSubject")}
                 required
                 value={formData.subject}
                 onChange={handleInputChange}
@@ -586,7 +654,7 @@ const App = () => {
                 name="message"
                 className={getInputClassName(formData.message)}
                 rows="5"
-                placeholder="message"
+                placeholder={t("inputMessage")}
                 required
                 value={formData.message}
                 onChange={handleInputChange}
@@ -600,7 +668,7 @@ const App = () => {
                     aria-hidden="true"
                   ></span>
                   <span role="status" className="ms-2">
-                    Sending...
+                    {t("titleBtnContactLoading")}
                   </span>
                 </button>
               ) : (
@@ -615,7 +683,7 @@ const App = () => {
                   >
                     <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
                   </svg>
-                  &nbsp;&nbsp;Send Message
+                  &nbsp;&nbsp;{t("titleBtnContact")}
                 </button>
               )}
             </div>
@@ -772,8 +840,7 @@ const App = () => {
           >
             <img
               src={isEnglish ? EnglishFlag : IndonesianFlag}
-              width="22px"
-              height="22px"
+              height="24px"
               className="object-fit-cover"
               alt="Language"
             />
@@ -995,7 +1062,11 @@ const App = () => {
 
               <div className="description">
                 <h6 style={{ fontSize: "18px" }}>Description</h6>
-                <p className="mb-0">{activeProject.description}</p>
+                <p className="mb-0">
+                  {isEnglish
+                    ? activeProject.description_en
+                    : activeProject.description_id}
+                </p>
               </div>
             </div>
           </>
