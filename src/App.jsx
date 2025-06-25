@@ -45,6 +45,12 @@ i18n.use(initReactI18next).init({
         inputMessage: "pesan",
         titleBtnContact: "Kirim Pesan",
         titleBtnContactLoading: "Mengirim...",
+        bottomSheetRole: "Peran",
+        bottomSheetClient: "Klien",
+        bottomSheetPeriod: "Periode",
+        bottomSheetTechno: "Teknologi",
+        bottomSheetResult: "Hasil",
+        bottomSheetDescription: "Deskripsi",
       },
     },
     en: {
@@ -71,6 +77,12 @@ i18n.use(initReactI18next).init({
         inputMessage: "message",
         titleBtnContact: "Send Message",
         titleBtnContactLoading: "Sending...",
+        bottomSheetRole: "Role",
+        bottomSheetClient: "Client",
+        bottomSheetPeriod: "Period",
+        bottomSheetTechno: "Technology",
+        bottomSheetResult: "Result",
+        bottomSheetDescription: "Description",
       },
     },
   },
@@ -932,7 +944,7 @@ const App = () => {
                         >
                           <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                         </svg>
-                        Role
+                        {t("bottomSheetRole")}
                       </td>
                       <td className="px-1 py-1">:</td>
                       <td className="px-0 py-1">{activeProject.role}</td>
@@ -949,7 +961,7 @@ const App = () => {
                         >
                           <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                         </svg>
-                        Client
+                        {t("bottomSheetClient")}
                       </td>
                       <td className="px-1 py-1">:</td>
                       <td className="px-0 py-1">{activeProject.client}</td>
@@ -967,7 +979,7 @@ const App = () => {
                           <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
                           <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                         </svg>
-                        Period
+                        {t("bottomSheetPeriod")}
                       </td>
                       <td className="px-1 py-1">:</td>
                       <td className="px-0 py-1">{activeProject.period}</td>
@@ -985,7 +997,7 @@ const App = () => {
                           <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
                           <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
                         </svg>
-                        Technology
+                        {t("bottomSheetTechno")}
                       </td>
                       <td className="px-1 py-1">:</td>
                       <td className="px-0 py-1">{activeProject.technology}</td>
@@ -1003,7 +1015,7 @@ const App = () => {
                           <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
                           <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
                         </svg>
-                        Demo
+                        {t("bottomSheetResult")}
                       </td>
                       <td className="px-1 py-1">:</td>
                       <td className="px-0 py-1">
@@ -1061,7 +1073,9 @@ const App = () => {
               </div>
 
               <div className="description">
-                <h6 style={{ fontSize: "18px" }}>Description</h6>
+                <h6 style={{ fontSize: "18px" }}>
+                  {t("bottomSheetDescription")}
+                </h6>
                 <p className="mb-0">
                   {isEnglish
                     ? activeProject.description_en
