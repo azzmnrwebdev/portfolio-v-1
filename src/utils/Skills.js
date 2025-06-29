@@ -1,11 +1,14 @@
 import Html from "../assets/images/skills/html.svg";
 import Css from "../assets/images/skills/css.svg";
 import Javascript from "../assets/images/skills/javascript.svg";
+import Php from "../assets/images/skills/php.svg";
+import Dart from "../assets/images/skills/dart.svg";
 import Jquery from "../assets/images/skills/jquery.svg";
 import Bootstrap from "../assets/images/skills/bootstrap.svg";
-import Php from "../assets/images/skills/php.svg";
 import Laravel from "../assets/images/skills/laravel.svg";
 import ReactJS from "../assets/images/skills/react.svg";
+import Flutter from "../assets/images/skills/flutter.svg";
+import WordPress from "../assets/images/skills/wordpress.svg";
 import VsCode from "../assets/images/skills/vscode.svg";
 import Git from "../assets/images/skills/git.svg";
 import Github from "../assets/images/skills/github.svg";
@@ -25,6 +28,14 @@ const skills = [
     name: "Javascript",
   },
   {
+    image: Php,
+    name: "PHP",
+  },
+  {
+    image: Dart,
+    name: "Dart",
+  },
+  {
     image: Jquery,
     name: "JQuery",
   },
@@ -33,16 +44,20 @@ const skills = [
     name: "Bootstrap",
   },
   {
-    image: Php,
-    name: "PHP",
-  },
-  {
     image: Laravel,
     name: "Laravel",
   },
   {
     image: ReactJS,
     name: "React JS",
+  },
+  {
+    image: Flutter,
+    name: "Flutter",
+  },
+  {
+    image: WordPress,
+    name: "WordPress",
   },
   {
     image: VsCode,
