@@ -274,7 +274,8 @@ body {
 
 /* Skills */
 #skills ul.splide__pagination {
-  margin-bottom: -3rem !important;
+  z-index: 0;
+  margin-bottom: -3rem;
 }
 
 #skills ul.splide__pagination li button.is-active {
