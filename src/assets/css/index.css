@@ -272,6 +272,15 @@ body {
   }
 }
 
+/* Skills */
+#skills ul.splide__pagination {
+  margin-bottom: -3rem !important;
+}
+
+#skills ul.splide__pagination li button.is-active {
+  background: #32cd32;
+}
+
 /* Education */
 #education .accordion-custom {
   background-color: #343a40;

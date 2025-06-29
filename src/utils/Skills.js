@@ -9,6 +9,8 @@ import Laravel from "../assets/images/skills/laravel.svg";
 import ReactJS from "../assets/images/skills/react.svg";
 import Flutter from "../assets/images/skills/flutter.svg";
 import WordPress from "../assets/images/skills/wordpress.svg";
+import MySQL from "../assets/images/skills/mysql.svg";
+import PostgreSQL from "../assets/images/skills/postgresql.svg";
 import VsCode from "../assets/images/skills/vscode.svg";
 import Git from "../assets/images/skills/git.svg";
 import Github from "../assets/images/skills/github.svg";
@@ -58,6 +60,14 @@ const skills = [
   {
     image: WordPress,
     name: "WordPress",
+  },
+  {
+    image: MySQL,
+    name: "MySQL",
+  },
+  {
+    image: PostgreSQL,
+    name: "PostgreSQL",
   },
   {
     image: VsCode,

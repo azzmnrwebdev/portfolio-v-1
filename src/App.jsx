@@ -536,7 +536,7 @@ const App = () => {
               autoplay: true,
               interval: 2500,
               autoWidth: true,
-              pagination: false,
+              pagination: true,
               pauseOnHover: true,
               pauseOnFocus: false,
               resetProgress: false,
@@ -577,7 +577,7 @@ const App = () => {
       </section>
 
       {/* Education */}
-      <section id="education" style={{ paddingTop: "2rem" }}>
+      <section id="education" style={{ paddingTop: "4rem" }}>
         <div className="container">
           <h2 className="section-title mb-3">{t("educationTitle")}</h2>
 
