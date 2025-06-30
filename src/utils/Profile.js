@@ -1,4 +1,5 @@
-import CVPath from "../assets/resume/CV_Muhammad_Azzam_Nur_Alwi_Mansyur.pdf";
+import CVPathId from "../assets/resume/id/CV_Muhammad_Azzam_Nur_Alwi_Mansyur.pdf";
+import CVPathEn from "../assets/resume/en/CV_Muhammad_Azzam_Nur_Alwi_Mansyur.pdf";
 
 const profileData = {
   username: "Muhammad Azzam",
@@ -15,7 +16,8 @@ const profileData = {
       Let me introduce myself, my name is Muhammad Azzam Nur Alwi Mansyur, a Full Stack Developer based in South Jakarta, with a primary focus on web and mobile application development. I hold a Bachelor's degree in Informatics Engineering from Sekolah Tinggi Teknologi Terpadu Nurul Fikri and have 1 year and 5 months of work experience as a Full Stack Developer at an IT consulting services company. On the technical side, I possess skills in building web applications using Laravel, PHP, JavaScript, jQuery, Bootstrap, and React JS, developing mobile applications with Dart and Flutter, as well as database management using MySQL and PostgreSQL. I continuously enhance these skills to create digital solutions that are not only functional and scalable but also deliver an optimal user experience. In addition to technical competencies, I have soft skills such as team collaboration, interpersonal communication, problem-solving, and solution-oriented thinking, enabling me to contribute effectively both in team and independent work settings. As a technology professional, I always strive to keep up with industry developments to deliver relevant and impactful innovations.
     </p>
   `,
-  cv_url: CVPath,
+  cv_url_id: CVPathId,
+  cv_url_en: CVPathEn,
 };
 
 export default profileData;

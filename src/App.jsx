@@ -269,7 +269,7 @@ const App = () => {
           <div className="row g-2">
             <div className="col-auto">
               <a
-                href={profileData.cv_url}
+                href={isEnglish ? profileData.cv_url_en : profileData.cv_url_id}
                 download
                 className="btn btn-cv py-2 px-3 fw-semibold mt-3 d-flex align-items-center"
               >
