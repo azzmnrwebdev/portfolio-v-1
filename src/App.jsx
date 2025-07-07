@@ -45,11 +45,15 @@ i18n.use(initReactI18next).init({
         inputMessage: "pesan",
         titleBtnContact: "Kirim Pesan",
         titleBtnContactLoading: "Mengirim...",
+        bottomSheetType: "Tipe Proyek",
+        bottomSheetCompany: "Perusahaan",
         bottomSheetRole: "Peran",
         bottomSheetClient: "Klien",
         bottomSheetPeriod: "Periode",
         bottomSheetTechno: "Teknologi",
         bottomSheetResult: "Hasil",
+        bottomSheetSource: "Sumber Kode",
+        bottomSheetIsEmpty: "Tidak Tersedia",
         bottomSheetDescription: "Deskripsi",
       },
     },
@@ -77,11 +81,15 @@ i18n.use(initReactI18next).init({
         inputMessage: "message",
         titleBtnContact: "Send Message",
         titleBtnContactLoading: "Sending...",
+        bottomSheetType: "Project Type",
+        bottomSheetCompany: "Company",
         bottomSheetRole: "Role",
         bottomSheetClient: "Client",
         bottomSheetPeriod: "Period",
         bottomSheetTechno: "Technology",
         bottomSheetResult: "Result",
+        bottomSheetSource: "Source Code",
+        bottomSheetIsEmpty: "Not Available",
         bottomSheetDescription: "Description",
       },
     },
@@ -104,6 +112,7 @@ const App = () => {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
   const [activeProject, setActiveProject] = useState(null);
   const [showBottomSheet, setShowBottomSheet] = useState(false);
+  const [isTranslateVisible, setIsTranslateVisible] = useState(true);
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -218,13 +227,19 @@ const App = () => {
     return `form-control ${value ? "has-value" : ""}`;
   };
 
-  // Button To Top
+  // Button To Top & Button Translate
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
+      }
+
+      if (window.pageYOffset > 290) {
+        setIsTranslateVisible(false);
+      } else {
+        setIsTranslateVisible(true);
       }
     };
 
@@ -448,11 +463,11 @@ const App = () => {
                               alt="Thumbnail"
                             />
                           </div>
-                          {(project.link_github || project.link_demo) && (
+                          {(project.link_source || project.link_demo) && (
                             <div className="d-flex justify-content-start align-items-center gap-3 mb-2">
-                              {project.link_github && (
+                              {project.link_source && (
                                 <a
-                                  href={project.link_github}
+                                  href={project.link_source}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   style={{ fontSize: "14px", color: "#32cd32" }}
@@ -761,6 +776,32 @@ const App = () => {
         </svg>
       </button>
 
+      {/* Button Translate */}
+      <button
+        className="btn p-0 d-flex align-items-sm-center justify-content-sm-center rounded-circle"
+        style={{
+          right: "20px",
+          border: "none",
+          bottom: "20px",
+          outline: "none",
+          color: "#212529",
+          cursor: "pointer",
+          position: "fixed",
+          transformOrigin: "center",
+          opacity: isTranslateVisible ? 1 : 0,
+          transform: isTranslateVisible ? "scale(1)" : "scale(0)",
+          transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
+        }}
+        onClick={toggleLanguage}
+      >
+        <img
+          src={isEnglish ? IndonesianFlag : EnglishFlag}
+          height="32px"
+          className="object-fit-cover"
+          alt="Language"
+        />
+      </button>
+
       {/* Menu Bottom */}
       <div className="container">
         <div
@@ -854,7 +895,7 @@ const App = () => {
             style={{ cursor: "pointer" }}
           >
             <img
-              src={isEnglish ? EnglishFlag : IndonesianFlag}
+              src={isEnglish ? IndonesianFlag : EnglishFlag}
               height="24px"
               className="object-fit-cover"
               alt="Language"
@@ -935,6 +976,7 @@ const App = () => {
               >
                 <table className="table table-borderless text-nowrap mb-0">
                   <tbody>
+                    {/* Tipe Proyek */}
                     <tr>
                       <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
                         <svg
@@ -942,33 +984,65 @@ const App = () => {
                           width="16"
                           height="16"
                           fill="currentColor"
-                          className="bi bi-person-fill"
+                          className="bi bi-briefcase-fill"
                           viewBox="0 0 16 16"
                         >
-                          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                          <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5" />
+                          <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85z" />
                         </svg>
-                        {t("bottomSheetRole")}
+                        {t("bottomSheetType")}
                       </td>
                       <td className="px-1 py-1">:</td>
-                      <td className="px-0 py-1">{activeProject.role}</td>
-                    </tr>
-                    <tr>
-                      <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="bi bi-person-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                        </svg>
-                        {t("bottomSheetClient")}
+                      <td className="px-0 py-1">
+                        {isEnglish
+                          ? activeProject.type_en
+                          : activeProject.type_id}
                       </td>
-                      <td className="px-1 py-1">:</td>
-                      <td className="px-0 py-1">{activeProject.client}</td>
                     </tr>
+
+                    {/* Perusahaan */}
+                    {activeProject.company && (
+                      <tr>
+                        <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-building-fill"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M3 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3v-3.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V16h3a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm1 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5M4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5m2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5m2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5" />
+                          </svg>
+                          {t("bottomSheetCompany")}
+                        </td>
+                        <td className="px-1 py-1">:</td>
+                        <td className="px-0 py-1">{activeProject.company}</td>
+                      </tr>
+                    )}
+
+                    {/* Klien */}
+                    {activeProject.client && (
+                      <tr>
+                        <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-person-fill"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                          </svg>
+                          {t("bottomSheetClient")}
+                        </td>
+                        <td className="px-1 py-1">:</td>
+                        <td className="px-0 py-1">{activeProject.client}</td>
+                      </tr>
+                    )}
+
+                    {/* Periode */}
                     <tr>
                       <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
                         <svg
@@ -991,6 +1065,8 @@ const App = () => {
                           : activeProject.period_id}
                       </td>
                     </tr>
+
+                    {/* Peran */}
                     <tr>
                       <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
                         <svg
@@ -998,11 +1074,29 @@ const App = () => {
                           width="16"
                           height="16"
                           fill="currentColor"
-                          className="bi bi-wrench-adjustable"
+                          className="bi bi-person-fill"
                           viewBox="0 0 16 16"
                         >
-                          <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
-                          <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                        {t("bottomSheetRole")}
+                      </td>
+                      <td className="px-1 py-1">:</td>
+                      <td className="px-0 py-1">{activeProject.role}</td>
+                    </tr>
+
+                    {/* Technology */}
+                    <tr>
+                      <td className="ps-0 pe-2 py-1 d-flex align-items-center gap-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-code-slash"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0" />
                         </svg>
                         {t("bottomSheetTechno")}
                       </td>
@@ -1037,9 +1131,7 @@ const App = () => {
                           </a>
                         ) : (
                           <span className="text-danger">
-                            {isEnglish
-                              ? activeProject.status_demo_en
-                              : activeProject.status_demo_id}
+                            {t("bottomSheetIsEmpty")}
                           </span>
                         )}
                       </td>
@@ -1057,24 +1149,22 @@ const App = () => {
                           <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
                           <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
                         </svg>
-                        Github
+                        {t("bottomSheetSource")}
                       </td>
                       <td className="px-1 py-1">:</td>
                       <td className="px-0 py-1">
-                        {activeProject.link_github ? (
+                        {activeProject.link_source ? (
                           <a
-                            href={activeProject.link_github}
+                            href={activeProject.link_source}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-decoration-none"
                           >
-                            {activeProject.link_github}
+                            {activeProject.link_source}
                           </a>
                         ) : (
                           <span className="text-danger">
-                            {isEnglish
-                              ? activeProject.status_github_en
-                              : activeProject.status_github_id}
+                            {t("bottomSheetIsEmpty")}
                           </span>
                         )}
                       </td>

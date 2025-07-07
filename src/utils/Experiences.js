@@ -16,8 +16,7 @@ const Experiences = [
         <li>
           <small>
             Melakukan pengujian SIT (System Integration Testing) dan UAT (User Acceptance
-            Testing) untuk memastikan kualitas aplikasi web dan mobile sebelum digunakan
-            pengguna akhir.
+            Testing) untuk memastikan kualitas aplikasi web dan mobile.
           </small>
         </li>
       </ul>
@@ -30,7 +29,7 @@ const Experiences = [
         <li><small>Developing Android and iOS mobile applications with Flutter.</small></li>
         <li>
           <small>
-            Performing System Integration Testing (SIT) and User Acceptance Testing (UAT) to guarantee the quality of the web and mobile applications before they are used by end users.
+            Performing System Integration Testing (SIT) and User Acceptance Testing (UAT) to guarantee the quality of the web and mobile applications.
           </small>
         </li>
       </ul>
