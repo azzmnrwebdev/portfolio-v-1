@@ -1,2 +1,4 @@
-User-agent: *
+User-agent: Googlebot
 Allow: /
+
+Sitemap: https://azzmnrdev.com/sitemap.xml
