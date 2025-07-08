@@ -261,8 +261,12 @@ const App = () => {
     <>
       {showLoader && (
         <div className={`loading-screen ${animateClass}`}>
-          <h1 className="mb-1">Welcome To</h1>
-          <h1 className="mb-2">Portfolio Website</h1>
+          <h1 className="mb-2">
+            Welcome To
+            <br />
+            Portfolio Website
+          </h1>
+
           <p className="mb-0">Presented By Muhammad Azzam</p>
         </div>
       )}
@@ -271,7 +275,7 @@ const App = () => {
       <header id="header">
         <div className="container">
           <div className="image-wrapper">
-            <img src={profile} width="100%" alt="Profile" />
+            <img src={profile} width="100%" height="100%" alt="Profile" />
           </div>
 
           <h5 className="title text-light">
@@ -460,6 +464,8 @@ const App = () => {
                               src={imageSrc}
                               style={{ objectPosition: "top" }}
                               className="img-fluid object-fit-cover rounded-3"
+                              width="100%"
+                              height="100%"
                               alt="Thumbnail"
                             />
                           </div>
@@ -580,6 +586,8 @@ const App = () => {
                         width: "auto",
                         height: "auto",
                       }}
+                      width="100%"
+                      height="100%"
                       alt={`Logo ${skill.name}`}
                     />
                   </div>
@@ -796,6 +804,7 @@ const App = () => {
       >
         <img
           src={isEnglish ? IndonesianFlag : EnglishFlag}
+          width="32px"
           height="32px"
           className="object-fit-cover"
           alt="Language"
@@ -896,6 +905,7 @@ const App = () => {
           >
             <img
               src={isEnglish ? IndonesianFlag : EnglishFlag}
+              width="24px"
               height="24px"
               className="object-fit-cover"
               alt="Language"
